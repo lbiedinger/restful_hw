@@ -39,10 +39,12 @@ class OracleOfBacon
     rescue Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
       Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError,
       Net::ProtocolError => e
+      raise OracleOfBacon::NetworkError
       # convert all of these into a generic OracleOfBacon::NetworkError,
       #  but keep the original error message
       # your code here
     end
+    OracleOfBacon::Response.new(xml)
     # your code here: create the OracleOfBacon::Response object
   end
 
