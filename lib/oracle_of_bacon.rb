@@ -1,4 +1,5 @@
 require 'debugger'              # optional, may be helpful
+
 require 'open-uri'              # allows open('http://...') to return body
 require 'cgi'                   # for escaping URIs
 require 'nokogiri'              # XML parser
@@ -20,11 +21,15 @@ class OracleOfBacon
   validate :from_does_not_equal_to
 
   def from_does_not_equal_to
-    # YOUR CODE HERE
+    if @from == @to
+      errors.add(:from_does_not_equal_to, "From cannot be the same as To")
+    end
   end
 
   def initialize(api_key='')
-    # your code here
+    @api_key = api_key
+    @from = "Kevin Bacon"
+    @to = "Kevin Bacon"
   end
 
   def find_connections
